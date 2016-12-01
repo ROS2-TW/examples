@@ -19,6 +19,8 @@
 
 #include "example_interfaces/srv/add_two_ints.hpp"
 
+using namespace std::chrono_literals;
+
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
@@ -27,7 +29,7 @@ int main(int argc, char ** argv)
 
   auto client = node->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints");
 
-  while (!client->wait_for_service(1_s)) {
+  while (!client->wait_for_service(1s)) {
     if (!rclcpp::ok()) {
       printf("add_two_ints_client was interrupted while waiting for the service. Exiting.\n");
       return 0;
